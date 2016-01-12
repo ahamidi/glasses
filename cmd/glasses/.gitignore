@@ -1,0 +1,6 @@
+.env
+gin-bin
+glasses
+credentials.json
+*.jpg
+*.png
