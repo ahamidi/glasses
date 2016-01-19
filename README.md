@@ -1,3 +1,4 @@
+![Glasses by Kyle Scott] (https://s3.amazonaws.com/ahamidi-public/glasses.png)
 ## Glasses
 Go package for the [Google Cloud Vision API](https://cloud.google.com/vision/)
 
@@ -21,3 +22,5 @@ Go package for the [Google Cloud Vision API](https://cloud.google.com/vision/)
 * Authentication:
     Authentication depends on [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials). Setting that up is beyond the scope of this project, but essentially requires the creation of a `Service Account`, download the JSON formatted credentials and setting an Env Var to point at it.
 
+### Logo
+Glasses Icon by Kyle Scott from Noun Project
