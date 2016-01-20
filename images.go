@@ -3,6 +3,7 @@ package glasses
 import (
 	b64 "encoding/base64"
 	"io/ioutil"
+	"net/http"
 )
 
 type Image struct {
@@ -11,7 +12,19 @@ type Image struct {
 
 func NewImageFromURL(url string) (*Image, error) {
 
-	return nil, nil
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	enc := b64.StdEncoding.EncodeToString(body)
+
+	return &Image{enc}, nil
 }
 
 func NewImageFromFile(file string) (*Image, error) {

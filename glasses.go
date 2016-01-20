@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"golang.org/x/oauth2"
@@ -52,6 +51,10 @@ type ImageContext struct {
 //Error                Status               `json:"error"`
 //}
 
+type AnnotateResponses struct {
+	Responses []AnnotateResponse `json:"responses"`
+}
+
 type AnnotateResponse struct {
 	FaceAnnotations      []interface{} `json:"faceAnnotations"`
 	LandmarkAnnotations  []interface{} `json:"landmarkAnnotation"`
@@ -71,10 +74,9 @@ func NewGlasses() (*Glasses, error) {
 	}
 
 	return &Glasses{client}, nil
-
 }
 
-func (g *Glasses) Do(r *CloudVisionRequest) (*AnnotateResponse, error) {
+func (g *Glasses) Do(r *CloudVisionRequest) (*AnnotateResponses, error) {
 
 	jR, err := json.Marshal(r)
 	if err != nil {
@@ -90,11 +92,12 @@ func (g *Glasses) Do(r *CloudVisionRequest) (*AnnotateResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	log.Println("Response:", string(body))
 
-	var resp *AnnotateResponse
+	//log.Println("Body:", string(body))
 
-	err = json.Unmarshal(body, resp)
+	var resp *AnnotateResponses
+
+	err = json.Unmarshal(body, &resp)
 	if err != nil {
 		return nil, err
 	}
