@@ -1,3 +1,6 @@
+[![Circle CI](https://circleci.com/gh/ahamidi/glasses.svg?style=svg)](https://circleci.com/gh/ahamidi/glasses)
+[![GoDoc](https://godoc.org/github.com/ahamidi/glasses?status.svg)](https://godoc.org/github.com/ahamidi/glasses)
+
 ![Glasses by Kyle Scott] (https://s3.amazonaws.com/ahamidi-public/glasses.png)
 ## Glasses
 Go package for the [Google Cloud Vision API](https://cloud.google.com/vision/)
