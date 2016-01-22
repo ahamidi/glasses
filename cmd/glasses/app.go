@@ -8,9 +8,10 @@ import (
 )
 
 var (
-	file = flag.String("f", "", "Local file to analyze.")
-	url  = flag.String("u", "", "URL for image to analyze.")
-	face = flag.Bool("face", false, "Face detection.")
+	file  = flag.String("f", "", "Local file to analyze.")
+	url   = flag.String("u", "", "URL for image to analyze.")
+	face  = flag.Bool("face", false, "Face detection.")
+	label = flag.Bool("label", false, "Label detection.")
 )
 
 func main() {
@@ -32,19 +33,32 @@ func main() {
 		log.Println("Error:", err)
 	}
 
-	req := &AnnotateRequest{
-		Image: f,
-		Features: []Feature{
-			{"FACE_DETECTION", 1},
-		},
+	reqs := &CloudVisionRequest{
+		Requests: []*AnnotateRequest{},
+		User:     "ahamidi",
+	}
+
+	if *face {
+		req := &AnnotateRequest{
+			Image: f,
+			Features: []Feature{
+				{"FACE_DETECTION", 10},
+			},
+		}
+		reqs.Requests = append(reqs.Requests, req)
+	}
+
+	if *label {
+		req := &AnnotateRequest{
+			Image: f,
+			Features: []Feature{
+				{"LABEL_DETECTION", 10},
+			},
+		}
+		reqs.Requests = append(reqs.Requests, req)
 	}
 
 	gl, err := NewGlasses()
-
-	reqs := &CloudVisionRequest{
-		Requests: []*AnnotateRequest{req},
-		User:     "ahamidi",
-	}
 
 	resp, err := gl.Do(reqs)
 	if err != nil {
