@@ -36,7 +36,7 @@ type Feature struct {
 
 type ImageContext struct {
 	LatLongRect                 interface{} `json:"latLongRect"`
-	ImageContextSearchExtension interface{} `imageContextSearchExtension`
+	ImageContextSearchExtension interface{} `json:"imageContextSearchExtension"`
 }
 
 //type AnnotateResponse struct {
